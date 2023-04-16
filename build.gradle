@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+targetCompatibility = 8
+sourceCompatibility = 8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+
+dependencies {
+    implementation 'systems.manifold:manifold-props-rt:2023.1.5'
+    annotationProcessor 'systems.manifold:manifold-props:2023.1.5'
+
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+}
+
+tasks.withType(JavaCompile) {
+    // If you DO NOT define a module-info.java file:
+    options.compilerArgs += ['-Xplugin:Manifold']
+}
